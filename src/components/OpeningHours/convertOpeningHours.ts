@@ -1,12 +1,12 @@
 import moment from 'moment';
 
 type OpeningHourItem = {
-	type: string;
-	value: number;
+  type: string;
+  value: number;
 };
 
 type OpeningHoursType = {
-	[dayOfWeek: string]: OpeningHourItem[];
+  [dayOfWeek: string]: OpeningHourItem[];
 };
 
 type OpeningHoursStringified = {
@@ -20,7 +20,7 @@ export const daysOfWeekSorted = [
   'thursday',
   'friday',
   'saturday',
-  'sunday',
+  'sunday'
 ];
 
 function getPreviousIndex(index: number): number {
@@ -54,7 +54,7 @@ function joinHoursToString(hours: string[]): string {
  * Converts array of [{type: "open", value: 123}, ...] to "1 PM - 2 PM, 3 PM - 4 PM"
  */
 function hourArrayToString(arr: OpeningHourItem[]): string {
-  const hours = arr.map(hourItem => {
+  const hours = arr.map((hourItem) => {
     return getFormattedHour(hourItem.value);
   });
   return joinHoursToString(hours);
@@ -63,9 +63,11 @@ function hourArrayToString(arr: OpeningHourItem[]): string {
 export const isToday = (day: string) => {
   const today = moment().format('dddd').toLowerCase();
   return day === today;
-}
+};
 
-export default function convertOpeningHours(openingHours: OpeningHoursType): OpeningHoursStringified {
+export default function convertOpeningHours(
+  openingHours: OpeningHoursType
+): OpeningHoursStringified {
   const result = [];
   for (let i = 0; i < daysOfWeekSorted.length; i++) {
     const dayOfWeek = daysOfWeekSorted[i];
@@ -83,13 +85,12 @@ export default function convertOpeningHours(openingHours: OpeningHoursType): Ope
       result[i].shift();
     }
   }
-	const daysArray = result.map(hourArrayToString);
+  const daysArray = result.map(hourArrayToString);
 
   return daysArray.reduce((acc, item, idx) => {
     return {
       ...acc,
-      [daysOfWeekSorted[idx]]: item,
-    }
+      [daysOfWeekSorted[idx]]: item
+    };
   }, {});
-
 }
