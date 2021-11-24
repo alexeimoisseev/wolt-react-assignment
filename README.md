@@ -13,7 +13,9 @@ npm i
 npm start
 ```
 
-Then open in browser: http://localhost:3000
+Then open in browser: http://localhost:3000.
+
+Also available on github pages: https://alexeimoisseev.github.io/wolt-react-assignment/
 
 ## Linting and prettifying
 
